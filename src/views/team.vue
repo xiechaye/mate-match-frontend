@@ -1,11 +1,13 @@
 <script setup lang="ts">
-
-import BasicLayout from '@/layouts/BasicLayout.vue'
+defineOptions({
+  name: 'TeamIndex',
+})
 </script>
 
 <template>
-  <BasicLayout></BasicLayout>
+  <h1>队伍</h1>
 </template>
 
 <style scoped>
+
 </style>

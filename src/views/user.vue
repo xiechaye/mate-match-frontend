@@ -1,11 +1,13 @@
 <script setup lang="ts">
-
-import BasicLayout from '@/layouts/BasicLayout.vue'
+defineOptions({
+  name: 'UserIndex',
+})
 </script>
 
 <template>
-  <BasicLayout></BasicLayout>
+  <h1>用户</h1>
 </template>
 
 <style scoped>
+
 </style>
