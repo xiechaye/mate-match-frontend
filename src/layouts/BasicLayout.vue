@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import router from '@/router'
 
-const onClickLeft = () => alert('左')
-const onClickRight = () => alert('右')
+const onClickLeft = () => router.back()
+const onClickRight = () => router.push('/search')
 
 const active = ref(0);
 </script>
@@ -19,7 +20,7 @@ const active = ref(0);
     </template>
   </van-nav-bar>
 
-  <router-view />
+  <router-view/>
 
   <van-tabbar v-model="active" route>
     <van-tabbar-item icon="home-o" name="index" to="/layout">首页</van-tabbar-item>

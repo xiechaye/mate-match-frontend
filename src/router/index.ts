@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeIndex from '@/views/index.vue'
-import TeamIndex from '@/views/team.vue'
-import UserIndex from '@/views/user.vue'
+import HomePage from '@/views/index.vue'
+import TeamPage from '@/views/teamPage.vue'
+import UserPage from '@/views/userPage.vue'
+import SearchPage from '@/views/searchPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,17 +13,21 @@ const router = createRouter({
       children: [
         {
           path: '/layout',
-          component: HomeIndex
+          component: HomePage
         },
         {
           path: '/team',
-          component: TeamIndex
+          component: TeamPage
         },
         {
           path: '/user',
-          component: UserIndex
+          component: UserPage
         }
       ]
+    },
+    {
+      path: '/search',
+      component: SearchPage
     }
   ],
 })
