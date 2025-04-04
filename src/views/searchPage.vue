@@ -38,6 +38,7 @@ const activeIndex = ref();
 // 选中的标签的列表
 const tagList = ref(originTagList);
 
+// 删除标签
 const doClose = (tag: string) => {
   activeIds.value = activeIds.value
     .filter((item: string) => item !== tag);
@@ -61,6 +62,7 @@ const onSearch = () => {
     return;
   }
   console.log('搜索', activeIds.value);
+  // todo: 完善搜索逻辑
 }
 </script>
 
