@@ -3,6 +3,7 @@ import { useRoute } from 'vue-router'
 import { onMounted, ref } from 'vue'
 import { searchUsersByTags } from '@/api/user.ts'
 import type { UserType } from '@/model/user'
+import BasicLayout from '@/layouts/BasicLayout.vue'
 
 defineOptions({
   name: 'SearchResultPage',
@@ -27,25 +28,27 @@ onMounted(async () => {
 </script>
 
 <template>
-  <van-empty v-if="!userInfoList || userInfoList.length < 1" description="搜索结果为空" />
-  <van-card
-    v-for="userInfo in userInfoList"
-    :key="userInfo.userAccount"
-    :desc="userInfo.profile"
-    :title="userInfo.username"
-    :thumb="userInfo.avatarUrl"
-  >
-    <template #tags>
-      <van-tag v-for="tag in userInfo.tags"
-               :key="tag"
-               plain
-               type="primary"
-               style="margin-right: 8px; margin-top: 8px">{{ tag }}</van-tag>
-    </template>
-    <template #footer>
-      <van-button size="mini">联系我</van-button>
-    </template>
-  </van-card>
+  <BasicLayout>
+    <van-empty v-if="!userInfoList || userInfoList.length < 1" description="搜索结果为空" />
+    <van-card
+      v-for="userInfo in userInfoList"
+      :key="userInfo.userAccount"
+      :desc="userInfo.profile"
+      :title="userInfo.username"
+      :thumb="userInfo.avatarUrl"
+    >
+      <template #tags>
+        <van-tag v-for="tag in userInfo.tags"
+                 :key="tag"
+                 plain
+                 type="primary"
+                 style="margin-right: 8px; margin-top: 8px">{{ tag }}</van-tag>
+      </template>
+      <template #footer>
+        <van-button size="mini">联系我</van-button>
+      </template>
+    </van-card>
+  </BasicLayout>
 </template>
 
 <style scoped>

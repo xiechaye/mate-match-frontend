@@ -19,9 +19,11 @@ const active = ref(0);
       <van-icon name="search" size="18" />
     </template>
   </van-nav-bar>
-  <body id="content">
-    <router-view/>
-  </body>
+  <div id="content">
+  <router-view>
+    <slot></slot>
+  </router-view>
+  </div>
   <van-tabbar v-model="active" route>
     <van-tabbar-item icon="home-o" name="index" to="/layout">首页</van-tabbar-item>
     <van-tabbar-item icon="friends-o" name="team" to="/team">队伍</van-tabbar-item>

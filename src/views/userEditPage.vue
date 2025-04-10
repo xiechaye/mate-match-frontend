@@ -7,6 +7,7 @@ import { toRef } from 'vue'
 import { useUserStore } from '@/stores/user.ts'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
+import BasicLayout from '@/layouts/BasicLayout.vue'
 
 defineOptions({
   name: 'UserEditPage'
@@ -60,39 +61,41 @@ const onFinish = ({ selectedOptions }) => {
 </script>
 
 <template>
-  <van-form @submit="onSubmit">
-    <body v-if="editInfo.editKey === 'gender'">
-    <van-field
-      v-model="fieldValue"
-      is-link
-      readonly
-      label="性别"
-      placeholder="请选择性别"
-      @click="show = true"
-    />
-    <van-popup v-model:show="show" round position="bottom">
-      <van-cascader
-        v-model="currentValue"
-        title="性别"
-        :options="options"
-        @close="show = false"
-        @finish="onFinish"
+  <BasicLayout>
+    <van-form @submit="onSubmit">
+      <body v-if="editInfo.editKey === 'gender'">
+      <van-field
+        v-model="fieldValue"
+        is-link
+        readonly
+        label="性别"
+        placeholder="请选择性别"
+        @click="show = true"
       />
-    </van-popup>
-    </body>
-    <body v-else>
-    <van-field
-      v-model="editInfo.currentValue"
-      :label="editInfo.editName"
-      placeholder="请输入{{ editInfo.editName }}"
-      :rules="[{ required: true, message: '请填写' + editInfo.editName }]" />
-    </body>
-    <div style="margin: 16px;">
-      <van-button round block type="primary" native-type="submit">
-        提交
-      </van-button>
-    </div>
+      <van-popup v-model:show="show" round position="bottom">
+        <van-cascader
+          v-model="currentValue"
+          title="性别"
+          :options="options"
+          @close="show = false"
+          @finish="onFinish"
+        />
+      </van-popup>
+      </body>
+      <body v-else>
+      <van-field
+        v-model="editInfo.currentValue"
+        :label="editInfo.editName"
+        placeholder="请输入{{ editInfo.editName }}"
+        :rules="[{ required: true, message: '请填写' + editInfo.editName }]" />
+      </body>
+      <div style="margin: 16px;">
+        <van-button round block type="primary" native-type="submit">
+          提交
+        </van-button>
+      </div>
     </van-form>
+  </BasicLayout>
 </template>
 
 <style scoped>

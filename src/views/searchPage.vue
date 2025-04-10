@@ -4,6 +4,7 @@ import 'vant/es/toast/style'
 import { ref } from 'vue';
 import { showFailToast } from 'vant'
 import { useRouter } from 'vue-router';
+import BasicLayout from '@/layouts/BasicLayout.vue'
 defineOptions({
   name: 'SearchPage',
 })
@@ -74,32 +75,34 @@ const onSearch = () => {
 </script>
 
 <template>
-  <van-search
-    v-model="searchText"
-    show-action
-    placeholder="请输入搜索标签"
-    @update:model-value="onUpdate"
-    @search="onSearch"
-  >
-    <template #action>
-      <div @click="onSearch">搜索</div>
-    </template>
-  </van-search>
-  <van-divider>已选标签</van-divider>
-  <van-row gutter="16">
-    <van-col v-for="tag in activeIds" :key="tag">
-      <van-tag :show="true" closeable size="medium" type="primary" @close="doClose(tag)">
-        {{ tag }}
-      </van-tag>
-    </van-col>
-  </van-row>
-  <van-divider>选择标签</van-divider>
+  <BasicLayout>
+    <van-search
+      v-model="searchText"
+      show-action
+      placeholder="请输入搜索标签"
+      @update:model-value="onUpdate"
+      @search="onSearch"
+    >
+      <template #action>
+        <div @click="onSearch">搜索</div>
+      </template>
+    </van-search>
+    <van-divider>已选标签</van-divider>
+    <van-row gutter="16">
+      <van-col v-for="tag in activeIds" :key="tag">
+        <van-tag :show="true" closeable size="medium" type="primary" @close="doClose(tag)">
+          {{ tag }}
+        </van-tag>
+      </van-col>
+    </van-row>
+    <van-divider>选择标签</van-divider>
 
-  <van-tree-select
-    v-model:active-id="activeIds"
-    v-model:main-active-index="activeIndex"
-    :items="tagList"
-  />
+    <van-tree-select
+      v-model:active-id="activeIds"
+      v-model:main-active-index="activeIndex"
+      :items="tagList"
+    />
+  </BasicLayout>
 </template>
 
 <style scoped>
