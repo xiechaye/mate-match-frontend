@@ -6,6 +6,9 @@ import SearchPage from '@/views/searchPage.vue'
 import UserEditPage from '@/views/userEditPage.vue'
 import SearchResultPage from '@/views/searchResultPage.vue'
 import UserLoginPage from '@/views/userLoginPage.vue'
+import { useUserStore } from '@/stores/user'
+
+const authUrls = ['/team', '/user', '/user/edit'];
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,6 +48,22 @@ const router = createRouter({
       component:UserLoginPage
     }
   ],
+})
+
+// 全局前置守卫
+router.beforeEach((to, from, next) => {
+  const store = useUserStore();
+  store.getCurrentUserInfo();
+  if(!authUrls.includes(to.path)) {
+    next();
+    return;
+  }
+  if(store.currentUserInfo === null || Object.keys(store.currentUserInfo).length === 0) {
+    // 如果当前用户信息为空，则跳转到登录页面
+    next('/user/login');
+    return;
+  }
+  next();
 })
 
 export default router

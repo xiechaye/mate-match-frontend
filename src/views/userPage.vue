@@ -17,20 +17,20 @@ const store = useUserStore();
 const { currentUserInfo } = storeToRefs(store);
 
 
-// 验证用户是否登录
-onMounted(async () => {
-
-  await store.getCurrentUserInfo();
-  if (!currentUserInfo.value || Object.keys(currentUserInfo.value).length === 0) {
-    await router.replace({
-      path: 'user/login',
-      query: {
-        backUrl: route.fullPath
-      }
-    })
-    showFailToast('请先登录');
-  }
-})
+// // 验证用户是否登录
+// onMounted(async () => {
+//
+//   await store.getCurrentUserInfo();
+//   if (!currentUserInfo.value || Object.keys(currentUserInfo.value).length === 0) {
+//     await router.replace({
+//       path: 'user/login',
+//       query: {
+//         backUrl: route.fullPath
+//       }
+//     })
+//     showFailToast('请先登录');
+//   }
+// })
 
 const doEdit = (editKey: string, editName: string, currentValue: unknown) => {
   // 将 currentValue 转换为字符串
