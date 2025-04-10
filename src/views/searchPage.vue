@@ -3,9 +3,12 @@ import 'vant/es/toast/style'
 
 import { ref } from 'vue';
 import { showFailToast } from 'vant'
+import { useRouter } from 'vue-router';
 defineOptions({
   name: 'SearchPage',
 })
+
+const router = useRouter();
 
 // 所有标签
 const originTagList = [
@@ -61,8 +64,12 @@ const onSearch = () => {
     showFailToast('请至少选择一个标签');
     return;
   }
-  console.log('搜索', activeIds.value);
-  // todo: 完善搜索逻辑
+  router.push({
+    path: '/user/list',
+    query: {
+      tags: activeIds.value
+    }
+  })
 }
 </script>
 
