@@ -9,7 +9,7 @@ const active = ref(0);
 </script>
 
 <template>
-  <van-nav-bar
+  <van-nav-bar fixed
     title="标题"
     left-arrow
     @click-left="onClickLeft"
@@ -19,9 +19,9 @@ const active = ref(0);
       <van-icon name="search" size="18" />
     </template>
   </van-nav-bar>
-
-  <router-view/>
-
+  <body id="content">
+    <router-view/>
+  </body>
   <van-tabbar v-model="active" route>
     <van-tabbar-item icon="home-o" name="index" to="/layout">首页</van-tabbar-item>
     <van-tabbar-item icon="friends-o" name="team" to="/team">队伍</van-tabbar-item>
@@ -30,6 +30,9 @@ const active = ref(0);
 </template>
 
 <style scoped>
-
+  #content {
+    padding-bottom: 50px;
+    padding-top: 50px;
+  }
 </style>
 
