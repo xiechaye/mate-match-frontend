@@ -22,7 +22,7 @@ export type UserType = {
  */
 export type ResponseType = {
   code: number;
-  data: object | UserType | number;
+  data: object | UserType | number | UserType[];
   message: string;
   description: string;
 }

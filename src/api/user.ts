@@ -34,3 +34,8 @@ export const userLogin = (userAccount: string, userPassword: string) : Promise<R
 export const getCurrentUser = () : Promise<ResponseType> => {
   return myAxios.get('/user/current')
 }
+
+// 推荐用户
+export const recommendUsers = () => {
+  return myAxios.get('/user/recommend')
+}
