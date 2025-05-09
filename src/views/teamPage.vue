@@ -2,14 +2,16 @@
 import BasicLayout from '@/layouts/BasicLayout.vue'
 
 defineOptions({
-  name: 'TeamIndex',
+  name: 'TeamPage',
 })
 </script>
 
 <template>
-  <BasicLayout>
-    <h1>队伍</h1>
-  </BasicLayout>
+<BasicLayout>
+  <div>
+    队伍页面
+  </div>
+</BasicLayout>
 </template>
 
 <style scoped>

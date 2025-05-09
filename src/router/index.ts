@@ -6,6 +6,7 @@ import SearchPage from '@/views/searchPage.vue'
 import UserEditPage from '@/views/userEditPage.vue'
 import SearchResultPage from '@/views/searchResultPage.vue'
 import UserLoginPage from '@/views/userLoginPage.vue'
+import AddTeamIndex from '@/views/addTeamPage.vue'
 import { useUserStore } from '@/stores/user'
 
 const authUrls = ['/team', '/user', '/user/edit'];
@@ -46,6 +47,10 @@ const router = createRouter({
     {
       path: '/user/login',
       component:UserLoginPage
+    },
+    {
+      path: '/team/add',
+      component: AddTeamIndex
     }
   ],
 })
