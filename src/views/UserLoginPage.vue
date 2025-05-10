@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import 'vant/es/toast/style'
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue'
 import { userLogin } from '@/api/user.ts'
+import { useUserStore } from '@/stores/user'
 
 import { useRouter, useRoute } from 'vue-router';
 import { showFailToast, showSuccessToast } from 'vant'
@@ -10,8 +11,16 @@ defineOptions({
   name: 'UserLoginPage',
 })
 
+const store = useUserStore();
 const router = useRouter();
 const route = useRoute();
+
+onMounted(async () => {
+  if(store.currentUserInfo !== null && Object.keys(store.currentUserInfo).length !== 0) {
+    const url = typeof route.query.backUrl === 'string' ? route.query.backUrl : '/';
+    await router.push(url)
+  }
+})
 
 const userAccount = ref('');
 const userPassword = ref('');

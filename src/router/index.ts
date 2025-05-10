@@ -1,15 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomePage from '@/views/index.vue'
+import HomePage from '@/views/Index.vue'
 import TeamPage from '@/views/teamPage.vue'
-import UserPage from '@/views/userPage.vue'
-import SearchPage from '@/views/searchPage.vue'
-import UserEditPage from '@/views/userEditPage.vue'
-import SearchResultPage from '@/views/searchResultPage.vue'
-import UserLoginPage from '@/views/userLoginPage.vue'
-import AddTeamIndex from '@/views/addTeamPage.vue'
-import { useUserStore } from '@/stores/user'
+import UserPage from '@/views/UserPage.vue'
+import SearchPage from '@/views/SearchPage.vue'
+import UserEditPage from '@/views/UserEditPage.vue'
+import SearchResultPage from '@/views/SearchResultPage.vue'
+import UserLoginPage from '@/views/UserLoginPage.vue'
+import AddTeamPage from '@/views/AddTeamPage.vue'
+import { useUserStore } from '@/stores/User'
+import UpdateTeamPage from '@/views/UpdateTeamPage.vue'
+import CreateTeamPage from '@/views/CreateTeamPage.vue'
+import JoinTeamPage from '@/views/JoinTeamPage.vue'
+import UserUpdatePage from '@/views/UserUpdatePage.vue'
 
-const authUrls = ['/team', '/user', '/user/edit'];
+const authUrls = ['/team', '/user', '/user/edit', '/team/add'];
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -50,7 +54,23 @@ const router = createRouter({
     },
     {
       path: '/team/add',
-      component: AddTeamIndex
+      component: AddTeamPage
+    },
+    {
+      path: '/team/update',
+      component: UpdateTeamPage
+    },
+    {
+      path: '/user/update',
+      component: UserUpdatePage
+    },
+    {
+      path: '/team/my/create',
+      component: CreateTeamPage
+    },
+    {
+      path: '/team/my/join',
+      component: JoinTeamPage
     }
   ],
 })

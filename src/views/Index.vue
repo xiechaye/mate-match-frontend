@@ -4,7 +4,7 @@
   import { ref } from 'vue'
   import { onMounted } from 'vue'
   import { recommendUsers } from '@/api/user.ts'
-  import UserCartList from '@/components/userCartList.vue'
+  import UserCartList from '@/components/UserCartList.vue'
 
   defineOptions({
     name: 'HomeIndex',

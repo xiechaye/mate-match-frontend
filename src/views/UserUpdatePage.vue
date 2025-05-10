@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import { useUserStore } from '@/stores/user.ts'
+import { useUserStore } from '@/stores/User.ts'
 import { storeToRefs } from 'pinia'
-import { showFailToast } from 'vant'
 import { useRoute, useRouter } from 'vue-router'
-import { onMounted } from 'vue'
 import BasicLayout from '@/layouts/BasicLayout.vue'
 
 defineOptions({
-  name: 'UserIndex',
+  name: 'UserUpdatePage',
 })
 
 
