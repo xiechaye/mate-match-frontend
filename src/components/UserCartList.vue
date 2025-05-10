@@ -10,7 +10,7 @@ const props = defineProps<UserCartListProps>()
 <template>
   <van-card
     v-for="userInfo in userInfoList"
-    :key="userInfo.userAccount"
+    :key="userInfo.id"
     :desc="userInfo.profile"
     :title="userInfo.username"
     :thumb="userInfo.avatarUrl"

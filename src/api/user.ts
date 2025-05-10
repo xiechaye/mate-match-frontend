@@ -35,7 +35,16 @@ export const getCurrentUser = () : Promise<ResponseType> => {
   return myAxios.get('/user/current')
 }
 
-// 推荐用户
+// 获取默认用户
 export const recommendUsers = () => {
   return myAxios.get('/user/recommend')
+}
+
+// 推荐匹配用户
+export const getMatchUserList = (num : number) => {
+  return myAxios.get('/user/match', {
+    params: {
+      num
+    }
+  })
 }
