@@ -14,6 +14,8 @@ interface TeamCartListProps {
   TeamInfoList: TeamType[]
 }
 
+
+
 const route = useRoute()
 const router = useRouter()
 const store = useUserStore()
@@ -101,15 +103,24 @@ const url = route.path
                     type="primary"
                     @click="doUpdateTeam(teamInfo.id)">更新队伍</van-button>
 
-        <van-button v-if="url === '/team'"
-          size="small" type="primary" @click="doJoinTeam(teamInfo.id)">加入队伍</van-button>
+        <div v-if="url === '/team'">
+          <van-button v-if="!teamInfo.userList.some(user => user.id === currentUserInfo.id)"
+                      size="small" type="primary"
+                      @click="doJoinTeam(teamInfo.id)">加入队伍</van-button>
+          <van-button v-else
+                      size="small" type="primary"
+                      disabled
+                      @click="doJoinTeam(teamInfo.id)">已加入</van-button>
+        </div>
+
+
 
         <van-button v-if="currentUserInfo.id === teamInfo.userId &&
          (url === '/team/my/create' || url === '/team/my/join')"
-          size="small" type="primary" @click="doDeleteTeam(teamInfo.id)">解散队伍</van-button>
+          size="small" plain type="danger" @click="doDeleteTeam(teamInfo.id)">解散队伍</van-button>
 
         <van-button v-if="url === '/team/my/join' || url === '/team/my/create'"
-          size="small" type="primary" @click="doQuitTeam(teamInfo.id)">退出队伍</van-button>
+          size="small" plain type="danger" @click="doQuitTeam(teamInfo.id)">退出队伍</van-button>
       </template>
     </van-card>
   </div>

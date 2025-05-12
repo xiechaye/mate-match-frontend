@@ -1,9 +1,7 @@
 <script setup lang="ts">
   import BasicLayout from '@/layouts/BasicLayout.vue'
-  import type { UserType } from '@/model/user'
+  import type { UserType } from '@/model/User'
   import { ref, watchEffect } from 'vue'
-  import { onMounted } from 'vue'
-  import { recommendUsers } from '@/api/user.ts'
   import UserCartList from '@/components/UserCartList.vue'
   import { useUserStore } from '@/stores/User.ts'
   import { defineOptions } from 'vue'
@@ -14,7 +12,13 @@
   })
   const router = useRouter()
   const store = useUserStore()
-  const userInfoList = ref<UserType[]>([])
+  const userInfoList = ref<UserType[]>([{} as UserType ,
+    {} as UserType,
+    {} as UserType,
+    {} as UserType,
+    {} as UserType])
+  const loading = ref(true)
+
 
   // 是否是匹配模式
   const isMatchMode = ref(false)
@@ -25,7 +29,11 @@
     if(isMatchMode.value){
       //  没有登录则跳转到登录页面
       if(store.currentUserInfo === null || Object.keys(store.currentUserInfo).length === 0){
-        await router.push('/user/login')
+        // 尝试获取当前登录对象
+        await store.getCurrentUserInfo()
+        if(store.currentUserInfo === null || Object.keys(store.currentUserInfo).length === 0){
+          await router.push('/user/login')
+        }
       }
 
       if(!store.matchUserList || store.matchUserList.length < 1) {
@@ -46,8 +54,10 @@
     })
   }
 
-  watchEffect(() => {
-    loadUserInfoList()
+  watchEffect(async () => {
+    loading.value = true
+    await loadUserInfoList()
+    loading.value = false
   })
 </script>
 
@@ -59,7 +69,8 @@
       </template>
     </van-cell>
     <van-empty v-if="!userInfoList || userInfoList.length < 1" description="搜索结果为空" />
-    <UserCartList :user-info-list="userInfoList" />
+    <UserCartList :user-info-list="userInfoList" :loading="loading" />
+
   </BasicLayout>
 </template>
 

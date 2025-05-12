@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import type { UserType } from '@/model/user'
+import type { UserType } from '@/model/User'
 import { getCurrentUser, getMatchUserList, recommendUsers} from '@/api/user.ts'
 
 export const useUserStore = defineStore('user', () => {
@@ -19,12 +19,17 @@ export const useUserStore = defineStore('user', () => {
   // 更新当前登录用户信息
   const updateCurrentUserInfo = (key: string, value: unknown) => {
     if (!currentUserInfo.value) {
-      currentUserInfo.value = {} as UserType;
+      return
     }
 
     if (key in currentUserInfo.value) {
       currentUserInfo.value[key as keyof UserType] = value;
     }
+  }
+
+  // 清除当前登录的用户信息
+  const clearCurrentUserInfo = () => {
+    currentUserInfo.value = {} as UserType
   }
 
   // 推荐用户列表（默认）
@@ -53,5 +58,6 @@ export const useUserStore = defineStore('user', () => {
   }
 
   return { currentUserInfo, getCurrentUserInfo, updateCurrentUserInfo,
-    recommendUserList, getRecommendUserListAct, matchUserList, getMatchUserListAct }
+    recommendUserList, getRecommendUserListAct, matchUserList, getMatchUserListAct,
+    clearCurrentUserInfo }
 })

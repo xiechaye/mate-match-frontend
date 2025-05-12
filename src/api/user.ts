@@ -48,3 +48,17 @@ export const getMatchUserList = (num : number) => {
     }
   })
 }
+
+// 用户注册功能
+export const userRegister = (userAccount: string, userPassword: string, checkPassword: string)  => {
+  return myAxios.post('/user/register', {
+    userAccount,
+    userPassword,
+    checkPassword
+  })
+}
+
+// 用户退出登录
+export const userLogout = () => {
+  return myAxios.post('/user/logout')
+}

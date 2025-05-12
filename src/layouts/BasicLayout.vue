@@ -1,16 +1,29 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import router from '@/router'
+import { useRouter, useRoute } from 'vue-router'
+import { watch } from 'vue'
+
+const router = useRouter()
+const route = useRoute()
 
 const onClickLeft = () => router.back()
 const onClickRight = () => router.push('/search')
 
 const active = ref(0);
+const DEFAULT_TITLE = '伙伴匹配'
+const title = ref(DEFAULT_TITLE)
+
+// 根据路由切换标题
+watch(() => route?.meta?.title, (newTitle) => {
+  title.value = newTitle || DEFAULT_TITLE
+}, { immediate: true })
+
+
 </script>
 
 <template>
   <van-nav-bar fixed
-    title="标题"
+    :title="title"
     left-arrow
     @click-left="onClickLeft"
     @click-right="onClickRight"

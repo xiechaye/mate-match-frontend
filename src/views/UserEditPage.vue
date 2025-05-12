@@ -4,7 +4,7 @@ import { ref } from 'vue'
 import { updateUser } from '@/api/user.ts'
 import { showSuccessToast } from 'vant'
 import { toRef } from 'vue'
-import { useUserStore } from '@/stores/user.ts'
+import { useUserStore } from '@/stores/User.ts'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 import BasicLayout from '@/layouts/BasicLayout.vue'
@@ -42,6 +42,11 @@ const options = [
 if (editInfo.value.editKey === 'gender') {
   const defaultGender = options.find(item => item.value === editInfo.value.currentValue)
   fieldValue.value = defaultGender ? defaultGender.text : ''
+}else {
+  console.log('editInfo.value.currentValue', editInfo.value.currentValue)
+  if(editInfo.value.currentValue === 'null' || editInfo.value.currentValue === undefined) {
+    editInfo.value.currentValue = '';
+  }
 }
 
 const onSubmit = async () => {
@@ -63,7 +68,7 @@ const onFinish = ({ selectedOptions }) => {
 <template>
   <BasicLayout>
     <van-form @submit="onSubmit">
-      <body v-if="editInfo.editKey === 'gender'">
+      <div v-if="editInfo.editKey === 'gender'">
       <van-field
         v-model="fieldValue"
         is-link
@@ -81,14 +86,14 @@ const onFinish = ({ selectedOptions }) => {
           @finish="onFinish"
         />
       </van-popup>
-      </body>
-      <body v-else>
+      </div>
+      <div v-else>
       <van-field
         v-model="editInfo.currentValue"
         :label="editInfo.editName"
-        placeholder="请输入{{ editInfo.editName }}"
+        :placeholder="'请输入' + editInfo.editName"
         :rules="[{ required: true, message: '请填写' + editInfo.editName }]" />
-      </body>
+      </div>
       <div style="margin: 16px;">
         <van-button round block type="primary" native-type="submit">
           提交

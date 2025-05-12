@@ -4,7 +4,7 @@ import { onMounted, ref } from 'vue'
 import { getTeamList } from '@/api/team.ts'
 import TeamCartList from '@/components/TeamCartList.vue'
 import type { TeamType } from '@/model/Team'
-import { showFailToast } from 'vant'
+import router from '@/router'
 
 defineOptions({
   name: 'TeamPage'
@@ -16,8 +16,6 @@ onMounted(async () => {
   const res = await getTeamList()
   if (res.code === 0 && res.data.length > 0){
     teamInfoList.value = res.data as TeamType[]
-  } else {
-    showFailToast('获取团队列表失败')
   }
 })
 const searchValue = ref('');
@@ -41,8 +39,17 @@ const onSearch = async () => {
     <van-empty v-if="!teamInfoList || teamInfoList.length < 1" description="搜索结果为空" />
     <TeamCartList :TeamInfoList="teamInfoList"/>
   </BasicLayout>
+  <div id="add" @click="router.push('/team/add')">
+    <van-button icon="plus" type="primary" round />
+  </div>
 </template>
 
 <style scoped>
-
+#add :deep(.van-button) {
+  height: 44px;
+  width: 44px;
+  position: absolute;
+  bottom: 100px;
+  right: 30px;
+}
 </style>

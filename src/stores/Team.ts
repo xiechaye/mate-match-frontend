@@ -37,7 +37,18 @@ export const useTeamStore = defineStore('team', () => {
   const deleteJoinTeamAct = (teamId: number) => {
     joinTeamList.value = joinTeamList.value.filter((team) => team.id !== teamId)
   }
+  // 清除创建队伍信息
+  const clearCreateTeamList = () => {
+    createTeamList.value = []
+  }
+
+  // 清除加入队伍信息
+  const clearJoinTeamList = () => {
+    joinTeamList.value = []
+  }
+
   return { createTeamList, getCreateTeamListAct,
     joinTeamList, getJoinTeamListAct,
-    deleteCreateTeamAct, deleteJoinTeamAct }
+    deleteCreateTeamAct, deleteJoinTeamAct,clearCreateTeamList,
+  clearJoinTeamList}
 })

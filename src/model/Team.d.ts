@@ -1,3 +1,5 @@
+import type { UserType } from '@/model/User'
+
 export type TeamType = {
   id: number,
   name: string,
@@ -9,4 +11,5 @@ export type TeamType = {
   status: number,
   createTime: Date,
   updateTime: Date,
+  userList: UserType[]
 }
