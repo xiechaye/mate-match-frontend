@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { UserType } from '@/model/User'
+import ikun from '@/assets/ikun.jpg'
+import { ref } from 'vue'
 
 interface UserCartListProps {
   userInfoList: UserType[],
@@ -8,6 +10,18 @@ interface UserCartListProps {
 const props = withDefaults(defineProps<UserCartListProps>(), {
   loading: true
 })
+
+const phone = ref('')
+const email = ref('')
+const showDialog = ref(false)
+const contact = (id: number) => {
+  showDialog.value = true
+  const userInfo = props.userInfoList.find(userInfo => userInfo.id === id)
+  if(userInfo) {
+    phone.value = userInfo.phone
+    email.value = userInfo.email
+  }
+}
 
 </script>
 
@@ -20,7 +34,7 @@ const props = withDefaults(defineProps<UserCartListProps>(), {
     <van-card
       :desc="userInfo.profile"
       :title="userInfo.username"
-      :thumb="userInfo.avatarUrl"
+      :thumb="userInfo.avatarUrl === null ? ikun : userInfo.avatarUrl"
     >
       <template #tags>
         <van-tag v-for="tag in userInfo.tags"
@@ -30,11 +44,17 @@ const props = withDefaults(defineProps<UserCartListProps>(), {
                  style="margin-right: 8px; margin-top: 8px">{{ tag }}
         </van-tag>
       </template>
-      <template #footer>
-        <van-button size="mini">联系我</van-button>
+      <template #footer >
+        <van-button @click="contact(userInfo.id)" size="mini">联系我</van-button>
       </template>
     </van-card>
   </van-skeleton>
+  <van-dialog v-model:show="showDialog" title="联系方式">
+    <van-cell-group>
+      <van-cell title="电话" :value="phone" />
+      <van-cell title="邮箱" :value="email" />
+    </van-cell-group>
+  </van-dialog>
 </template>
 
 <style scoped>

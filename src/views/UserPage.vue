@@ -5,6 +5,7 @@ import { storeToRefs } from 'pinia'
 import { userLogout } from '@/api/user.ts'
 import { useTeamStore } from '@/stores/Team.ts'
 import { useRouter } from 'vue-router'
+import ikun from '@/assets/ikun.jpg'
 
 defineOptions({
   name: 'UserPage',
@@ -29,7 +30,8 @@ const logout = async () => {
   <BasicLayout>
     <van-cell title="昵称" :value="currentUserInfo.username"/>
     <van-cell title="头像" >
-      <img :src="currentUserInfo.avatarUrl" style="height: 40px;">
+      <img :src="currentUserInfo.avatarUrl === null ? ikun : currentUserInfo.avatarUrl"
+           style="height: 40px;">
     </van-cell>
     <van-cell title="修改信息" is-link to="/user/update" />
     <van-cell title="我创建的队伍" is-link to="/team/my/create" />

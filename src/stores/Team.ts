@@ -1,12 +1,16 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import type { TeamType } from '@/model/Team'
-import { getCreateTeam, getJoinTeam } from '@/api/team.ts'
-
+import { getCreateTeam, getJoinTeam, getTeamList } from '@/api/team.ts'
+import { joinTeam } from '@/api/team.ts'
+import { showFailToast } from 'vant'
+import type { UserType } from '@/model/User'
 
 export const useTeamStore = defineStore('team', () => {
   const createTeamList = ref<TeamType[]>([] as TeamType[])
   const joinTeamList = ref<TeamType[]>([] as TeamType[])
+  // 队伍列表信息
+  const teamInfoList = ref<TeamType[]>([] as TeamType[])
 
   // 获取个人创建的队伍
   const getCreateTeamListAct = async () => {
@@ -26,6 +30,25 @@ export const useTeamStore = defineStore('team', () => {
     } else {
       joinTeamList.value = []
     }
+  }
+
+  // 获取队伍信息
+  const getTeamInfoListAct = async (searchText: string = '', status: number = 0) => {
+    const res = await getTeamList(searchText, status)
+    if(res.code === 0){
+      teamInfoList.value = res.data as TeamType[]
+    } else {
+      teamInfoList.value = []
+    }
+  }
+
+  // 队伍加入用户
+  const joinTeam = async (teamId: number, user: UserType) => {
+    teamInfoList.value.forEach((team) => {
+      if (team.id === teamId) {
+        team.userList.push(user)
+      }
+    })
   }
 
   // 删除创建队伍信息
@@ -50,5 +73,5 @@ export const useTeamStore = defineStore('team', () => {
   return { createTeamList, getCreateTeamListAct,
     joinTeamList, getJoinTeamListAct,
     deleteCreateTeamAct, deleteJoinTeamAct,clearCreateTeamList,
-  clearJoinTeamList}
+  clearJoinTeamList, teamInfoList, getTeamInfoListAct,joinTeam}
 })

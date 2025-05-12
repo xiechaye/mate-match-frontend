@@ -9,18 +9,21 @@ export const addTeam = (teamInfo : TeamType) => {
 }
 
 // 获取队伍信息
-export const getTeamList = (searchText: string = '') => {
+export const getTeamList = (searchText: string, status: number) => {
     return myAxios.get('/team/list', {
       params: {
-        searchText
+        searchText,
+        status
       }
     })
 }
 
 // 加入队伍
-export const joinTeam = (teamId: number) => {
+export const joinTeam = (teamId: number, status: number = 0, password: string = '') => {
   return myAxios.post('/team/join' ,{
-    teamId
+    teamId,
+    status,
+    password
   })
 }
 

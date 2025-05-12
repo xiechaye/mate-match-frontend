@@ -57,7 +57,12 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
+  // 清除推荐用户列表
+  const clearRecommendUserList = () => {
+    recommendUserList.value = [] as UserType[]
+  }
+
   return { currentUserInfo, getCurrentUserInfo, updateCurrentUserInfo,
     recommendUserList, getRecommendUserListAct, matchUserList, getMatchUserListAct,
-    clearCurrentUserInfo }
+    clearCurrentUserInfo, clearRecommendUserList }
 })

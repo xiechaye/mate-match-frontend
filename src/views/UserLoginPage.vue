@@ -7,6 +7,7 @@ import { useUserStore } from '@/stores/user'
 import { useRouter, useRoute } from 'vue-router';
 import { showFailToast, showSuccessToast } from 'vant'
 import BasicLayout from '@/layouts/BasicLayout.vue'
+
 defineOptions({
   name: 'UserLoginPage',
 })
@@ -30,6 +31,7 @@ const onSubmit = async () => {
 
   if(res?.code === 0 && res?.data !== null) {
     showSuccessToast('登录成功');
+    store.clearRecommendUserList()
     await router.push(url);
   }else {
     showFailToast(res?.description || '登录失败');
