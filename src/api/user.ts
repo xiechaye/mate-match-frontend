@@ -1,6 +1,6 @@
 import myAxios from '@/plugins/myAxios.ts'
 import qs from 'qs'
-import type { ResponseType, UserType } from '@/model/user'
+import type { ResponseType, UserType } from '@/model/User'
 
 // 根据标签搜索用户
 export const searchUsersByTags = (tagNameList: string[]) : Promise<ResponseType> => {

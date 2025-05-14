@@ -2,9 +2,9 @@
 import { useRoute } from 'vue-router'
 import { onMounted, ref } from 'vue'
 import { searchUsersByTags } from '@/api/user.ts'
-import type { UserType } from '@/model/user'
+import type { UserType } from '@/model/User'
 import BasicLayout from '@/layouts/BasicLayout.vue'
-import UserCartList from '@/components/userCartList.vue'
+import UserCartList from '@/components/UserCartList.vue'
 
 defineOptions({
   name: 'SearchResultPage',
