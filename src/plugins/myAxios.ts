@@ -3,7 +3,7 @@ import axios from 'axios'
 const isDev = import.meta.env.MODE === 'development' // 判断是否是开发环境
 
 const myAxios = axios.create({
-  baseURL: isDev ? "http://localhost:8080/api" : 'https://mate-match-161679-9-1328635751.sh.run.tcloudbase.com/api'
+  baseURL: isDev ? "http://localhost:8080/api" : 'http://localhost:8080/api'
 })
 
 myAxios.defaults.withCredentials = true; // 允许携带cookie
