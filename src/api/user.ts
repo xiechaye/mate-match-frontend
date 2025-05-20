@@ -1,6 +1,7 @@
 import myAxios from '@/plugins/myAxios.ts'
 import qs from 'qs'
 import type { ResponseType, UserType } from '@/model/User'
+import type { AxiosResponse } from 'axios'
 
 // 根据标签搜索用户
 export const searchUsersByTags = (tagNameList: string[]) : Promise<ResponseType> => {
@@ -61,4 +62,13 @@ export const userRegister = (userAccount: string, userPassword: string, checkPas
 // 用户退出登录
 export const userLogout = () => {
   return myAxios.post('/user/logout')
+}
+
+// 上传图片
+export const uploadAvatar = (formData: FormData) => {
+  return myAxios.post('/user/upload/avatar', formData,{
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
 }
