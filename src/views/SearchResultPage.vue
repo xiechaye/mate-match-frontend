@@ -10,6 +10,7 @@ defineOptions({
   name: 'SearchResultPage',
 })
 
+const loading = ref(true)
 const route = useRoute();
 
 const tagNameList = route.query.tags as string[];
@@ -18,7 +19,9 @@ const userInfoList = ref<UserType[]>([]);
 
 // 根据标签过滤用户信息
 onMounted(async () => {
+  loading.value = true;
   const res = await searchUsersByTags(tagNameList);
+  loading.value = false;
   userInfoList.value = res?.data as UserType[];
   userInfoList.value.forEach(userInfo => {
     if(userInfo.tags && typeof userInfo.tags === 'string') {
@@ -31,7 +34,7 @@ onMounted(async () => {
 <template>
   <BasicLayout>
     <van-empty v-if="!userInfoList || userInfoList.length < 1" description="搜索结果为空" />
-    <UserCartList :user-info-list="userInfoList"/>
+    <UserCartList :user-info-list="userInfoList" :loading="loading"/>
   </BasicLayout>
 </template>
 
